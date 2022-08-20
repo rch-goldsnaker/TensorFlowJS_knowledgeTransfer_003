@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Machine Learning Exercise</title>
+
+    <link rel="stylesheet" type="text/css" href="styles.css" media="screen" />
+
+    <!-- GoogleFonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+
+    <!-- Load the latest version of TensorFlow.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/knn-classifier"></script>
+    
+</head>
+<body>
+    <div class="Main">
+        <div class="headerMain">
+            <h1>Machine Learning - TensorFlow.js</h1>
+        </div>
+        <div class="contentMain">
+            <div class="Menu">
+                <div class="card">
+                    <div class="cardTitle">Problem</div>
+                    <div class="cardContent">
+                        <p>Create a machine learning application that can recognize the images from a camera in real time, and also that the app has the possibility of being trained with any image.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="side">
+                <div class="card">
+                    <div class="cardTitle">Description</div>
+                    <div class="cardContent">
+                        <p>First for the image recognition we are going to use "mobilenet" and the webcam, then we are going to transfer the knowledge to "knn-classifier" to be able to train the model with any image.</p>
+                    </div>
+                </div>
+                <div class="VideoCamTraining">
+                    <div class="cardVideo">
+                        <div class="cardTitle">VideoCam</div>
+                        <div class="cardContentImg">
+                            <video autoplay="" playsinline muted id="webcam" width="224" height="224"></video>
+                        </div>
+                    </div>
+                    <div class="cardTraining">
+                        <div class="cardTitle">Training</div>
+                        <div class="cardContentTraining">
+                            <div class="inputTraining">
+                                <input type="text" id="clase-1">
+                                <button  onclick="addExample(1)">Train</button>
+                                <div class="numberOfTrainings" id="numberOfTrainings-1">-</div>
+                            </div>
+                            <div class="inputTraining">
+                                <input type="text" id="clase-2">
+                                <button onclick="addExample(2)">Train</button>
+                                <div class="numberOfTrainings" id="numberOfTrainings-2">-</div>
+                            </div>
+                            <div class="inputTraining">
+                                <input type="text" id="clase-3">
+                                <button  onclick="addExample(3)">Train</button>
+                                <div class="numberOfTrainings" id="numberOfTrainings-3">-</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="cardTitle">Trained Predition</div>
+                    <div class="cardContent">
+                        <div id="console"></div>
+                        <table id="tablePrediction">
+                            <tr>
+                              <th>ClassName</th>
+                              <th>Probability</th>
+                            </tr>
+                            <tr>
+                                <td id="className2"></td>
+                                <td id="probability2"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="cardTitle">Predition</div>
+                    <div class="cardContent">
+                        <div id="console"></div>
+                        <table id="tablePrediction">
+                            <tr>
+                              <th>ClassName</th>
+                              <th>Probability</th>
+                            </tr>
+                            <tr>
+                                <td id="className"></td>
+                                <td id="probability"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Tensorflow -->
+<script src="main.js"></script>
+
+</body>
+</html>
