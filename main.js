@@ -84,7 +84,6 @@ async function addExample (classId) {
 
 positionFront.addEventListener('click', event => {
     webCamConfig.facingMode = 'user';
-    console.log(webCamConfig.facingMode)
     webCamElement.setAttribute("width",224);
     webCamElement.setAttribute("height",224);
     let menu = document.getElementById('selectorPosition');
@@ -96,7 +95,8 @@ positionFront.addEventListener('click', event => {
 
 positionRear.addEventListener('click', event => {
     webCamConfig.facingMode = 'environment';
-    console.log(webCamConfig.facingMode)
+    webCamElement.setAttribute("width",224);
+    webCamElement.setAttribute("height",224);
     let menu = document.getElementById('selectorPosition');
     while (menu.firstChild) {
         menu.removeChild(menu.firstChild);

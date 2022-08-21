@@ -190,6 +190,13 @@ input[type=text] {
     height: 60px;
 }
 
+#positionFront{
+    padding: 10px;
+}
+#positionRear{
+    padding: 10px;
+}
+
 @media all and (max-width: 600px){
     .contentMain{
         padding-top: 30px;
