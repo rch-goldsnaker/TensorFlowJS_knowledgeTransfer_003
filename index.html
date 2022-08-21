@@ -38,16 +38,17 @@
                     <div class="cardTitle">Description</div>
                     <div class="cardContent">
                         <p>First for the image recognition we are going to use "mobilenet" and the webcam, then we are going to transfer the knowledge to "knn-classifier" to be able to train the model with any image.</p>
-                        <button id="button">Get camera</button>
-                        <select id="select"></select>
-                        <video id="video" autoplay playsinline></video>
                     </div>
                 </div>
                 <div class="VideoCamTraining">
                     <div class="cardVideo">
                         <div class="cardTitle">VideoCam</div>
                         <div class="cardContentImg">
-                            <!-- <video autoplay="" playsinline muted id="webcam" width="224" height="224"></video> -->
+                            <video id="webcam" autoplay playsinline  width="224" height="224"></video>
+                            <div class="controlsVideo">
+                                <button id="button">Get camera</button>
+                                <select id="select"></select>
+                            </div>
                         </div>
                     </div>
                     <div class="cardTraining">

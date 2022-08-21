@@ -6,7 +6,7 @@ const classes = ["Untrained","","",""];
 const numberTrainings = ["","",""]
 
 
-const video = document.getElementById('video');
+const video = document.getElementById('webcam');
 const button = document.getElementById('button');
 const select = document.getElementById('select');
 let currentStream;
