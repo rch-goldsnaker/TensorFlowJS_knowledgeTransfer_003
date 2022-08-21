@@ -1,5 +1,4 @@
 let net;
-var whilebreak;
 
 const webCamElement = document.getElementById('webcam');
 const webCamConfig = {
@@ -18,7 +17,7 @@ async function app(){
     net = await mobilenet.load();
     webcam = await tf.data.webcam(webCamElement,webCamConfig);
 
-  while (whilebreak) {
+  while (true) {
     const img = await webcam.capture();
 
     const result = await net.classify(img);
@@ -84,17 +83,23 @@ async function addExample (classId) {
 }
 
 positionFront.addEventListener('click', event => {
-    whilebreak = false;
     webCamConfig.facingMode = 'user';
     console.log(webCamConfig.facingMode)
-    whilebreak = true;
+    webCamElement.setAttribute("width",224);
+    webCamElement.setAttribute("height",224);
+    let menu = document.getElementById('selectorPosition');
+    while (menu.firstChild) {
+        menu.removeChild(menu.firstChild);
+    }
     app();
 });
 
 positionRear.addEventListener('click', event => {
-    whilebreak = false;
     webCamConfig.facingMode = 'environment';
     console.log(webCamConfig.facingMode)
-    whilebreak = true;
+    let menu = document.getElementById('selectorPosition');
+    while (menu.firstChild) {
+        menu.removeChild(menu.firstChild);
+    }
     app();
 });
