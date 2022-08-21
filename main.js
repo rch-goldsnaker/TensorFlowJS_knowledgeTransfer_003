@@ -1,19 +1,24 @@
 let net;
+var whilebreak;
 
 const webCamElement = document.getElementById('webcam');
 const webCamConfig = {
     facingMode: 'environment'
 }
+
+const positionFront = document.getElementById('positionFront');
+const positionRear = document.getElementById('positionRear');
+
 const classifier = knnClassifier.create();
 const classes = ["Untrained","","",""];
-const numberTrainings = ["","",""]
+const numberTrainings = ["","",""];
 
 async function app(){
 
     net = await mobilenet.load();
     webcam = await tf.data.webcam(webCamElement,webCamConfig);
 
-  while (true) {
+  while (whilebreak) {
     const img = await webcam.capture();
 
     const result = await net.classify(img);
@@ -21,20 +26,20 @@ async function app(){
     const activation = net.infer(img, 'conv_preds');
     var result2;
     try {
-      result2 = await classifier.predictClass(activation);
+        result2 = await classifier.predictClass(activation);
     } catch (error) {
-      result2 = {};
+        result2 = {};
     }
 
     document.getElementById('className').innerText =  result[0].className;
     document.getElementById('probability').innerText =  Math.round(result[0].probability*100) + "%";
 
     try {
-    document.getElementById('className2').innerText =  classes[result2.label];
-    document.getElementById('probability2').innerText =  result2.confidences[result2.label];
+        document.getElementById('className2').innerText =  classes[result2.label];
+        document.getElementById('probability2').innerText =  result2.confidences[result2.label];
     } catch (error) {
-    document.getElementById('className2').innerText =  "Untrained";
-    document.getElementById('probability2').innerText =  "Untrained";
+        document.getElementById('className2').innerText =  "Untrained";
+        document.getElementById('probability2').innerText =  "Untrained";
     }
     // Dispose the tensor to release the memory.
     img.dispose();
@@ -78,4 +83,18 @@ async function addExample (classId) {
     img.dispose()
 }
 
-app();
+positionFront.addEventListener('click', event => {
+    whilebreak = false;
+    webCamConfig.facingMode = 'user';
+    console.log(webCamConfig.facingMode)
+    whilebreak = true;
+    app();
+});
+
+positionRear.addEventListener('click', event => {
+    whilebreak = false;
+    webCamConfig.facingMode = 'environment';
+    console.log(webCamConfig.facingMode)
+    whilebreak = true;
+    app();
+});
