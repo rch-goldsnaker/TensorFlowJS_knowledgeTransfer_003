@@ -1,72 +1,17 @@
 let net;
 
 const webCamElement = document.getElementById('webcam');
+const webCamConfig = {
+    facingMode: 'environment'
+}
 const classifier = knnClassifier.create();
 const classes = ["Untrained","","",""];
 const numberTrainings = ["","",""]
 
-
-const video = document.getElementById('webcam');
-const button = document.getElementById('button');
-const select = document.getElementById('select');
-let currentStream;
-
-function stopMediaTracks(stream) {
-  stream.getTracks().forEach(track => {
-    track.stop();
-  });
-}
-
-function gotDevices(mediaDevices) {
-  select.innerHTML = '';
-  select.appendChild(document.createElement('option'));
-  let count = 1;
-  mediaDevices.forEach(mediaDevice => {
-    if (mediaDevice.kind === 'videoinput') {
-      const option = document.createElement('option');
-      option.value = mediaDevice.deviceId;
-      const label = mediaDevice.label || `Camera ${count++}`;
-      const textNode = document.createTextNode(label);
-      option.appendChild(textNode);
-      select.appendChild(option);
-    }
-  });
-}
-
-button.addEventListener('click', event => {
-  if (typeof currentStream !== 'undefined') {
-    stopMediaTracks(currentStream);
-  }
-  const videoConstraints = {};
-  if (select.value === '') {
-    videoConstraints.facingMode = 'environment';
-  } else {
-    videoConstraints.deviceId = { exact: select.value };
-  }
-  const constraints = {
-    video: videoConstraints,
-    audio: false
-  };
-  navigator.mediaDevices
-    .getUserMedia(constraints)
-    .then(stream => {
-      currentStream = stream;
-      video.srcObject = stream;
-      return navigator.mediaDevices.enumerateDevices();
-    })
-    .then(gotDevices)
-    .catch(error => {
-      console.error(error);
-    });
-});
-
-navigator.mediaDevices.enumerateDevices().then(gotDevices);
-
 async function app(){
 
     net = await mobilenet.load();
-
-    webcam =await tf.data.webcam(webCamElement);
+    webcam = await tf.data.webcam(webCamElement,webCamConfig);
 
   while (true) {
     const img = await webcam.capture();
@@ -131,7 +76,6 @@ async function addExample (classId) {
     
     //liberamos el tensor
     img.dispose()
-    console.log(classes)
 }
 
 app();
